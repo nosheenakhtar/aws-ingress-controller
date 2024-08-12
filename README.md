@@ -2,7 +2,7 @@
 -------------------------- Create static IP for ingress controller in azure
 az aks show --resource-group OZ-RG-Owwll-QA --name Owwll-Test --query nodeResourceGroup -o tsv
 
-az network public-ip create --resource-group RG_mavenx_dev --location=eastus --name demo-public-ip --sku Standard --allocation-method static
+az network public-ip create --resource-group resourcegroupname --location=eastus --name demo-public-ip --sku Standard --allocation-method static
 
 172.177.46.181
 -------------------------
