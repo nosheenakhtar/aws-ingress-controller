@@ -1,6 +1,6 @@
 
 -------------------------- Create static IP for ingress controller in azure
-az aks show --resource-group OZ-RG-Owwll-QA --name Owwll-Test --query nodeResourceGroup -o tsv
+az aks show --resource-group resourceroupname --name clustername --query nodeResourceGroup -o tsv
 
 az network public-ip create --resource-group resourcegroupname --location=eastus --name demo-public-ip --sku Standard --allocation-method static
 
