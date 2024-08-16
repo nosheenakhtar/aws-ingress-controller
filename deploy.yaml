@@ -1,7 +1,3 @@
-edit below two lines inside deply.yaml to install nginx ingress controller on your cluster
-proxy-real-ip-cidr: add this as well
-service.beta.kubernetes.io/aws-load-balancer-ssl-cert: add cluster
-----------------
 apiVersion: v1
 kind: Namespace
 metadata:
