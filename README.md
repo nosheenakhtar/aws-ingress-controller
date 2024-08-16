@@ -1,44 +1,15 @@
 
--------------------------- Create static IP for ingress controller in azure
-az aks show --resource-group resourceroupname --name clustername --query nodeResourceGroup -o tsv
+1.	Edit the file and change the VPC CIDR in use for the Kubernetes cluster:
+          proxy-real-ip-cidr: XXX.XXX.XXX/XX
 
-az network public-ip create --resource-group resourcegroupname --location=eastus --name demo-public-ip --sku Standard --allocation-method static
+2.	Change the AWS Certificate Manager (ACM) ID as well:
 
-172.177.46.181
--------------------------
+            arn:aws:acm:us-west-2:XXXXXXXX:certificate/XXXXXX-XXXXXXX-XXXXXXX-XXXXXXXX
 
-Prerequisite
-
-Install chocolaty on windows system
-Install Helm using chocolaty
-
---------------------------------------------------
-
-1. Install ingress-nginx controller
-
-helm repo add ingress-nginx https://kubernetes.github.io/ingress-nginx
-helm repo update
-
-helm upgrade --install ingress-nginx ingress-nginx/ingress-nginx --values values.yaml
-helm uninstall ingress-nginx
+3.	Deploy the manifest:
+kubectl apply -f deploy.yaml
 
 
-2. Create Namespace in cluseter and install cert-manger using helm
+finally installed by this command 
 
-kubectl create namespace cert-manager
-
-helm repo add jetstack https://charts.jetstack.io
-
-helm install cert-manager jetstack/cert-manager --namespace cert-manager --version v1.9.0 --set installCRDs=true
-helm uninstall cert-manager
-
-3. Create Ingress rule
-
-kubectl apply -f .\{env}\ingress.yaml
-
-4. Create ClusterIssuer/Issuer
-
-5. Create Certificate
-
----- To get Kubeconfig  for creating service endpoint in CI/CD--------
-kubectl config view --flatten > config.yml
+kubectl apply -f https://raw.githubusercontent.com/kubernetes/ingress-nginx/controller-v1.8.2/deploy/static/provider/cloud/deploy.yaml
